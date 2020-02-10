@@ -1,0 +1,49 @@
+﻿@model Hospital.ViewModels.ProvisionOfPaidServicesViewModels.ProvisionOfPaidServicessViewModel
+
+@{
+    ViewData["Title"] = "ProvisionEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ProvisionEdit</h2>
+
+<h4>ProvisionOfPaidService</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ProvisionEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProvisionOfPaidServices.First().ProvisionId" class="control-label"></label>
+                <input asp-for="ProvisionOfPaidServices.First().ProvisionId" class="form-control" readonly />
+                <span asp-validation-for="ProvisionOfPaidServices.First().ProvisionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvisionOfPaidServices.First().DoctorsId" class="control-label"></label>
+                <select asp-for="ProvisionOfPaidServices.First().DoctorsId" class="form-control" asp-items="Model.DoctorsList"></select>
+                <span asp-validation-for="ProvisionOfPaidServices.First().DoctorsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvisionOfPaidServices.First().PacientsId" class="control-label"></label>
+                <select asp-for="ProvisionOfPaidServices.First().PacientsId" class="form-control" asp-items="Model.PacientList"></select>
+                <span asp-validation-for="ProvisionOfPaidServices.First().PacientsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvisionOfPaidServices.First().DateOfServiceProvision" class="control-label"></label>
+                <input asp-for="ProvisionOfPaidServices.First().DateOfServiceProvision" class="form-control" />
+                <span asp-validation-for="ProvisionOfPaidServices.First().DateOfServiceProvision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-cacheKey="ProvisionsCache">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

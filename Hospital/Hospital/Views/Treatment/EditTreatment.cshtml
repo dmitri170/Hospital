@@ -1,0 +1,65 @@
+﻿@model Hospital.ViewModels.TreatmentsViewModels.TreatmentsViewModel
+
+
+@{
+    ViewData["Title"] = "EditTreatment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditTreatment</h2>
+
+<h4>Treatment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditTreatment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().TreatmentId" class="control-label"></label>
+                <input asp-for="Treatments.First().TreatmentId" class="form-control" readonly />
+                <span asp-validation-for="Treatments.First().TreatmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().Diagnosis" class="control-label"></label>
+                <input asp-for="Treatments.First().Diagnosis" class="form-control" />
+                <span asp-validation-for="Treatments.First().Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().DoctorsId" class="control-label"></label>
+                <select asp-for="Treatments.First().DoctorsId" class="form-control" asp-items="Model.DoctorsList"></select>
+                <span asp-validation-for="Treatments.First().DoctorsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().PacientsId" class="control-label"></label>
+                <select asp-for="Treatments.First().PacientsId" class="form-control" asp-items="Model.PacientList"></select>
+                <span asp-validation-for="Treatments.First().PacientsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().DepartmentId" class="control-label"></label>
+                <select asp-for="Treatments.First().DepartmentId" class="form-control" asp-items="Model.DepartmentList"></select>
+                <span asp-validation-for="Treatments.First().DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().ReceiptDate" class="control-label"></label>
+                <input asp-for="Treatments.First().ReceiptDate" class="form-control" />
+                <span asp-validation-for="Treatments.First().ReceiptDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Treatments.First().DischargeDate" class="control-label"></label>
+                <input asp-for="Treatments.First().DischargeDate" class="form-control" />
+                <span asp-validation-for="Treatments.First().DischargeDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

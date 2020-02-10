@@ -1,0 +1,49 @@
+﻿@model Hospital.Models.Pacient
+
+@{
+    ViewData["Title"] = "CreatePacient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CreatePacient</h2>
+
+<h4>Pacient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreatePacient">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PatientSurnames" class="control-label"></label>
+                <input asp-for="PatientSurnames" class="form-control" />
+                <span asp-validation-for="PatientSurnames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PatientNames" class="control-label"></label>
+                <input asp-for="PatientNames" class="form-control" />
+                <span asp-validation-for="PatientNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberPalat" class="control-label"></label>
+                <input asp-for="NumberPalat" class="form-control" />
+                <span asp-validation-for="NumberPalat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adres" class="control-label"></label>
+                <input asp-for="Adres" class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

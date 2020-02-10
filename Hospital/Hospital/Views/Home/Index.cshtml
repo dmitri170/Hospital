@@ -1,0 +1,30 @@
+﻿@using Hospital.ViewModels
+@model HomeViewModel
+@addTagHelper "*, Utilities"
+@{
+    ViewData["Title"] = "Показания";
+}
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.TreatmentId)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.Diagnosis)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.DoctorSurname)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.PacientSurname)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.NameDepartment)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.ReceiptDate)</th>
+        <th>@Html.DisplayNameFor(model => model.TreatmentViewmodel.DischargeDate)</th>
+    </tr>
+    @foreach (var treatment in Model.Treatments)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => treatment.TreatmentId)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.Diagnosis)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.Doctors.DoctorSurnames)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.Pacients.PatientSurnames)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.Department.NameDepartments)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.ReceiptDate)</td>
+        <td>@Html.DisplayFor(modelItem => treatment.DischargeDate)</td>
+    </tr>
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"></page-link>

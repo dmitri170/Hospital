@@ -1,0 +1,54 @@
+﻿@model Hospital.ViewModels.ServisesViewModels.ServisesViewModel
+
+@{
+    ViewData["Title"] = "EditServises";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditServises</h2>
+
+<h4>Servise</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditServises">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Servises.First().ServisesId" class="control-label"></label>
+                <input asp-for="Servises.First().ServisesId" class="form-control" readonly />
+                <span asp-validation-for="Servises.First().ServisesId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servises.First().NameType" class="control-label"></label>
+                <input asp-for="Servises.First().NameType" class="form-control" />
+                <span asp-validation-for="Servises.First().NameType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servises.First().PriceService" class="control-label"></label>
+                <input asp-for="Servises.First().PriceService" class="form-control" />
+                <span asp-validation-for="Servises.First().PriceService" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servises.First().ProvisionId" class="control-label"></label>
+                <select asp-for="Servises.First().ProvisionId" class="form-control" asp-items="Model.ProvisionList"></select>
+                <span asp-validation-for="Servises.First().ProvisionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Servises.First().DataPrice" class="control-label"></label>
+                <input asp-for="Servises.First().DataPrice" class="form-control" />
+                <span asp-validation-for="Servises.First().DataPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

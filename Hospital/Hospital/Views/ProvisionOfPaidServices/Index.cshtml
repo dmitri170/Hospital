@@ -1,0 +1,66 @@
+﻿@using Hospital.ViewModels.ProvisionOfPaidServicesViewModels
+@model ProvisionOfPaidServicessViewModel
+@addTagHelper "*, Hospital"
+@{
+    ViewData["Title"] = "Оказания платной услуги";
+}
+    @Html.ActionLink("Create", "ProvisionCreate")
+
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Фамилия врача: </label>
+        @Html.DropDownList("doctor", Model.FilterViewModel.Doctors as SelectList, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">:Фамилия пациента </label>
+        @Html.DropDownList("pacient", Model.FilterViewModel.Pacients as SelectList, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Дата оказания платной услуги: </label>
+        @Html.TextBox("dateOfPaidServiceProvision", Model.FilterViewModel.SelectedDateOfServiceProvision, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ProvisionIdSort)"
+               asp-route-doctor="@(Model.FilterViewModel.SelectedDoctor)"
+               asp-route-pacient="@(Model.FilterViewModel.SelectedPacient)"
+               asp-route-dateOfPaidProvision="@(Model.FilterViewModel.SelectedDateOfServiceProvision)">@Html.DisplayNameFor(model => model.ProvisionOfPaidServicesViewModel.ProvisionId)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DoctorSurnameSort)"
+               asp-route-doctor="@(Model.FilterViewModel.SelectedDoctor)"
+               asp-route-pacient="@(Model.FilterViewModel.SelectedPacient)"
+               asp-route-dateOfPaidProvision="@(Model.FilterViewModel.SelectedDateOfServiceProvision)">@Html.DisplayNameFor(model => model.ProvisionOfPaidServicesViewModel.DoctorSurnames)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PacientSurnameSort)"
+               asp-route-doctor="@(Model.FilterViewModel.SelectedDoctor)"
+               asp-route-pacient="@(Model.FilterViewModel.SelectedPacient)"
+               asp-route-dateOfPaidProvision="@(Model.FilterViewModel.SelectedDateOfServiceProvision)">@Html.DisplayNameFor(model => model.ProvisionOfPaidServicesViewModel.PactientSurnames)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateOfServiceProvisionSort)"
+               asp-route-doctor="@(Model.FilterViewModel.SelectedDoctor)"
+               asp-route-pacient="@(Model.FilterViewModel.SelectedPacient)"
+               asp-route-dateOfPaidProvision="@(Model.FilterViewModel.SelectedDateOfServiceProvision)">@Html.DisplayNameFor(model => model.ProvisionOfPaidServicesViewModel.DateOfServiceProvision)</a>
+        </th>
+    </tr>
+    @foreach (var provision in Model.ProvisionOfPaidServices)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => provision.ProvisionId)</td>
+            <td>@Html.DisplayFor(modelItem => provision.Doctors.DoctorSurnames)</td>
+            <td>@Html.DisplayFor(modelItem => provision.Pacients.PatientSurnames)</td>
+            <td>@Html.DisplayFor(modelItem => provision.DateOfServiceProvision)</td>
+                <td>
+                    @Html.ActionLink("Edit", "ProvisionEdit", new { id = provision.ProvisionId }, null) |
+                    @Html.ActionLink("Delete", "ProvisionDelete", new { id = provision.ProvisionId }, null)
+                </td>
+        </tr>
+
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-doctor="@(Model.FilterViewModel.SelectedDoctor)"
+           page-url-pacient="@(Model.FilterViewModel.SelectedPacient)"
+           page-url-dateOfServiceProvision="@(Model.FilterViewModel.SelectedDateOfServiceProvision)"
+           page-url-sortOrder="@(Model.SortViewModel.Current)"></page-link>

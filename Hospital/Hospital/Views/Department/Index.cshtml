@@ -1,0 +1,54 @@
+﻿@using Hospital.ViewModels.DepartmentsViewModels
+@model DepartmentsViewModel
+@addTagHelper "*, Hospital"
+@{
+    ViewData["Title"] = "Отделение";
+}
+    @Html.ActionLink("Create", "CreateDepartment")
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Название отделения: </label>
+        @Html.TextBox("nameDepartment", Model.FilterViewModel.SelectedNameDepartments, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Количество мест: </label>
+        @Html.TextBox("numberPlace", Model.FilterViewModel.SelectedNumberPlace, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DepartmentIdSort)"
+               asp-route-nameDepartment="@(Model.FilterViewModel.SelectedNameDepartments)"
+               asp-route-numbePlace="@(Model.FilterViewModel.SelectedNumberPlace)" >@Html.DisplayNameFor(model => model.Department.DepartmentId)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameDepartmentSort)"
+               asp-route-nameDepartment="@(Model.FilterViewModel.SelectedNameDepartments)"
+               asp-route-numberPlace="@(Model.FilterViewModel.SelectedNumberPlace)">@Html.DisplayNameFor(model => model.Department.NameDepartments)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NumberPlace)"
+               asp-route-nameDepartment="@(Model.FilterViewModel.SelectedNameDepartments)"
+               asp-route-numberPlace="@(Model.FilterViewModel.SelectedNumberPlace)">@Html.DisplayNameFor(model => model.Department.NumberPlace)</a>
+        </th>
+    </tr>
+    @foreach (var department in Model.Departments)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => department.DepartmentId)</td>
+            <td>@Html.DisplayFor(modelItem => department.NameDepartments)</td>
+            <td>@Html.DisplayFor(modelItem => department.NumberPlace)</td>
+            
+                <td>
+                    @Html.ActionLink("Edit", "EditDepartment", new { id = department.DepartmentId }, null) |
+                    @Html.ActionLink("Delete", "DeleteDepartment", new { id = department.DepartmentId }, null)
+                </td>
+            
+        </tr>
+
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-nameDepartment="@(Model.FilterViewModel.SelectedNameDepartments)"
+           page-url-numberPlace="@(Model.FilterViewModel.SelectedNumberPlace)"
+           page-url-sortOrder="@(Model.SortViewModel.Current)"></page-link>

@@ -1,0 +1,59 @@
+﻿@model Hospital.ViewModels.DoctorsViewModels.DoctorsViewModel
+
+@{
+    ViewData["Title"] = "DoctorEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DoctorEdit</h2>
+
+<h4>Doctor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DoctorEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().DoctorsId" class="control-label"></label>
+                <input asp-for="Doctors.First().DoctorsId" class="form-control" readonly />
+                <span asp-validation-for="Doctors.First().DoctorsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().DepartmentId" class="control-label"></label>
+                <select asp-for="Doctors.First().DepartmentId" class="form-control" asp-items="Model.DepartmentList"></select>
+                <span asp-validation-for="Doctors.First().DepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().DoctorSurnames" class="control-label"></label>
+                <input asp-for="Doctors.First().DoctorSurnames" class="form-control" />
+                <span asp-validation-for="Doctors.First().DoctorSurnames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().DoctorNames" class="control-label"></label>
+                <input asp-for="Doctors.First().DoctorNames" class="form-control" />
+                <span asp-validation-for="Doctors.First().DoctorNames" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().Specialties" class="control-label"></label>
+                <input asp-for="Doctors.First().Specialties" class="form-control" />
+                <span asp-validation-for="Doctors.First().Specialties" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doctors.First().Categories" class="control-label"></label>
+                <input asp-for="Doctors.First().Categories" class="form-control" />
+                <span asp-validation-for="Doctors.First().Categories" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

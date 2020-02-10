@@ -1,0 +1,44 @@
+﻿@model Hospital.Models.ProvisionOfPaidService
+
+@{
+    ViewData["Title"] = "ProvisionCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ProvisionCreate</h2>
+
+<h4>ProvisionOfPaidService</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ProvisionCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DoctorsId" class="control-label"></label>
+                <select asp-for="DoctorsId" class="form-control" asp-items="ViewBag.DoctorsId">
+                    <option>Выберите фамилию врача</option>
+                </select>
+                <span asp-validation-for="DoctorsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PacientsId" class="control-label"></label>
+                <select asp-for="PacientsId" class="form-control" asp-items="ViewBag.PacientsId">
+                    <option>Выберите фамилию Пациента</option>
+                </select>
+                <span asp-validation-for="PacientsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfServiceProvision" class="control-label"></label>
+                <input asp-for="DateOfServiceProvision" class="form-control" />
+                <span asp-validation-for="DateOfServiceProvision" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-cacheKey="ProvisionsCache">Back to List</a>
+</div>

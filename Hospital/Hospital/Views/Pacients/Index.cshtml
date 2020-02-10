@@ -1,0 +1,80 @@
+﻿@using Hospital.ViewModels.PacientsViewModels
+@model PacientsViewModel
+@addTagHelper "*, Hospital"
+@{
+    ViewData["Title"] = "Пациенты";
+}
+    @Html.ActionLink("Create", "CreatePacient")
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Фамилия пациента: </label>
+        @Html.TextBox("patientSurname", Model.FilterViewModel.SelectedPatientSurnames, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Имя пациента: </label>
+        @Html.TextBox("patientName", Model.FilterViewModel.SelectedPatientNames, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Номер палаты: </label>
+        @Html.TextBox("numberPalat", Model.FilterViewModel.SelectedNumberPalat, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Адрес: </label>
+        @Html.TextBox("adre", Model.FilterViewModel.SelectedAdres, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PacientIdSort)"
+               asp-route-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+               asp-route-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+               asp-route-numberPalact="@(Model.FilterViewModel.SelectedNumberPalat)"
+               asp-route-adres="@(Model.FilterViewModel.SelectedAdres)">@Html.DisplayNameFor(model => model.Pacient.PacientsId)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PatientSurnamesSort)"
+               asp-route-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+               asp-route-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+               asp-route-numberPalact="@(Model.FilterViewModel.SelectedNumberPalat)"
+               asp-route-adres="@(Model.FilterViewModel.SelectedAdres)">@Html.DisplayNameFor(model => model.Pacient.PatientSurnames)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PatientNamesSort)"
+               asp-route-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+               asp-route-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+               asp-route-numberPalact="@(Model.FilterViewModel.SelectedNumberPalat)"
+               asp-route-adres="@(Model.FilterViewModel.SelectedAdres)">@Html.DisplayNameFor(model => model.Pacient.PatientNames)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NumberPalatSort)"
+               asp-route-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+               asp-route-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+               asp-route-numberPalact="@(Model.FilterViewModel.SelectedNumberPalat)"
+               asp-route-adres="@(Model.FilterViewModel.SelectedAdres)">@Html.DisplayNameFor(model => model.Pacient.NumberPalat)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.AdresSort)"
+               asp-route-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+               asp-route-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+               asp-route-numberPalact="@(Model.FilterViewModel.SelectedNumberPalat)"
+               asp-route-adres="@(Model.FilterViewModel.SelectedAdres)">@Html.DisplayNameFor(model => model.Pacient.Adres)</a>
+        </th>
+    </tr>
+    @foreach (var pacient in Model.Pacients)
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => pacient.PacientsId)</td>
+        <td>@Html.DisplayFor(modelItem => pacient.PatientSurnames)</td>
+        <td>@Html.DisplayFor(modelItem => pacient.PatientNames)</td>
+        <td>@Html.DisplayFor(modelItem => pacient.NumberPalat)</td>
+        <td>@Html.DisplayFor(modelItem => pacient.Adres)</td>
+            <td>
+                @Html.ActionLink("Edit", "EditPacient", new { id = pacient.PacientsId }, null) |
+                @Html.ActionLink("Delete", "DeletePacient", new { id = pacient.PacientsId }, null)
+            </td>
+    </tr>
+
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-patientSurname="@(Model.FilterViewModel.SelectedPatientSurnames)"
+           page-url-patientName="@(Model.FilterViewModel.SelectedPatientNames)"
+           page-url-numberPalat="@(Model.FilterViewModel.SelectedNumberPalat)"
+           page-url-adres="@(Model.FilterViewModel.SelectedAdres)"
+           page-url-sortOrder="@(Model.SortViewModel.Current)"></page-link>

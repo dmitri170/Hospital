@@ -1,0 +1,51 @@
+﻿@model Hospital.ViewModels.ServisesViewModels.ServisesViewModel
+
+@{
+    ViewData["Title"] = "DeleteServises";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteServises</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Servise</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Servises.First().ServisesId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Servises.First().ServisesId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Servises.First().NameType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Servises.First().NameType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Servises.First().PriceService)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Servises.First().PriceService)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Servises.First().DataPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Servises.First().DataPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Servises.First().Provision)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Servises.First().Provision.DateOfServiceProvision)
+        </dd>
+    </dl>
+
+    <form asp-action="DeleteServises">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index" asp-route-cacheKey="ServisesCache">Back to List</a>
+    </form>
+</div>

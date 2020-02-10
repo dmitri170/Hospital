@@ -1,0 +1,80 @@
+﻿@using Hospital.ViewModels.ServisesViewModels
+@model ServisesViewModel
+@addTagHelper "*, Hospital"
+@{
+    ViewData["Title"] = "Сервисы";
+}
+    @Html.ActionLink("Create", "CreateServises")
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Название услуги: </label>
+        @Html.TextBox("nameType", Model.FilterViewModel.SelectedNameType, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Цена услуги: </label>
+        @Html.TextBox("priceService", Model.FilterViewModel.SelectedPriceService, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Дата оказания платной услуги: </label>
+        @Html.TextBox("provision", Model.FilterViewModel.SelectedProvision, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Дата задания цены: </label>
+        @Html.TextBox("datePrice", Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"), htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.ServisesIdSort)"
+               asp-route-nameType="@(Model.FilterViewModel.SelectedNameType)"
+               asp-route-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+               asp-route-provision="@(Model.FilterViewModel.SelectedProvision)"
+               asp-route-datePrice="@(Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"))">@Html.DisplayNameFor(model => model.ServiseViewModel.ServisesId)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameTypeSort)"
+               asp-route-nameType="@(Model.FilterViewModel.SelectedNameType)"
+               asp-route-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+               asp-route-provision="@(Model.FilterViewModel.SelectedProvision)"
+               asp-route-datePrice="@(Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"))">@Html.DisplayNameFor(model => model.ServiseViewModel.NameType)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.PriceServiceSort)"
+               asp-route-nameType="@(Model.FilterViewModel.SelectedNameType)"
+               asp-route-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+               asp-route-provision="@(Model.FilterViewModel.SelectedProvision)"
+               asp-route-datePrice="@(Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"))">@Html.DisplayNameFor(model => model.ServiseViewModel.PriceService)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DateOfServiceProvisionSort)"
+               asp-route-nameType="@(Model.FilterViewModel.SelectedNameType)"
+               asp-route-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+               asp-route-provision="@(Model.FilterViewModel.SelectedProvision)"
+               asp-route-datePrice="@(Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"))">@Html.DisplayNameFor(model => model.ServiseViewModel.DateOfServiceProvision)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DatePriceSort)"
+               asp-route-nameType="@(Model.FilterViewModel.SelectedNameType)"
+               asp-route-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+               asp-route-provision="@(Model.FilterViewModel.SelectedProvision)"
+               asp-route-datePrice="@(Model.FilterViewModel.SelectedDatePrice.Date.ToString("yyyy-dd-MM"))">@Html.DisplayNameFor(model => model.ServiseViewModel.DatePrice)</a>
+        </th>
+    </tr>
+    @foreach (var servise in Model.Servises)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => servise.ServisesId)</td>
+            <td>@Html.DisplayFor(modelItem => servise.NameType)</td>
+            <td>@Html.DisplayFor(modelItem => servise.PriceService)</td>
+            <td>@Html.DisplayFor(modelItem => servise.Provision.DateOfServiceProvision)</td>
+            <td>@Html.DisplayFor(modelItem => servise.DataPrice)</td>
+                <td>
+                    @Html.ActionLink("Edit", "EditServises", new { id = servise.ServisesId }, null) |
+                    @Html.ActionLink("Delete", "DeleteServises", new { id = servise.ServisesId }, null)
+                </td>
+        </tr>
+
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-nameType="@(Model.FilterViewModel.SelectedNameType)"
+           page-url-priceService="@(Model.FilterViewModel.SelectedPriceService)"
+           page-url-provision="@(Model.FilterViewModel.SelectedProvision)"
+           page-url-datePrice="@(Model.FilterViewModel.SelectedDatePrice)"
+           page-url-sortOrder="@(Model.SortViewModel.Current)"></page-link>

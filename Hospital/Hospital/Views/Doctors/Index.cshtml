@@ -1,0 +1,98 @@
+﻿@using Hospital.ViewModels.DoctorsViewModels
+@model DoctorsViewModel
+@addTagHelper "*, Hospital"
+@{
+    ViewData["Title"] = "Врачи";
+}
+
+@Html.ActionLink("Create", "DoctorCreate")
+<form method="get">
+    <div class="form-inline">
+        <label class="control-label">Отделение: </label>
+        @Html.DropDownList("department", Model.FilterViewModel.Departments as SelectList, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Фамилия доктора: </label>
+        @Html.TextBox("doctorSurname", Model.FilterViewModel.SelectDoctorSurname, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Имя доктора: </label>
+        @Html.TextBox("doctorName", Model.FilterViewModel.SelectDoctorName, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Специальность: </label>
+        @Html.TextBox("specialties", Model.FilterViewModel.SelectSpecialties, htmlAttributes: new { @class = "form-control" })
+        <label class="control-label">Категория: </label>
+        @Html.TextBox("categories", Model.FilterViewModel.SelectCategories, htmlAttributes: new { @class = "form-control" })
+        <input type="submit" value="Фильтр" class="btn btn-default" />
+    </div>
+</form>
+<table class="table">
+    <tr>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.DoctorsIdSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.DoctorsId)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameDepartmentrSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.NameDepartments)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.SurnameSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.Surname)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.NameSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.Name)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.SpecialtiesSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.Specialties)</a>
+        </th>
+        <th>
+            <a asp-action="Index" asp-route-sortOrder="@(Model.SortViewModel.CategoriesSort)"
+               asp-route-department="@(Model.FilterViewModel.SelectedDepartment)"
+               asp-route-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+               asp-route-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+               asp-route-specialties="@(Model.FilterViewModel.SelectSpecialties)"
+               asp-route-categories="@(Model.FilterViewModel.SelectCategories)">@Html.DisplayNameFor(model => model.DoctorViewModel.Categories)</a>
+        </th>
+    </tr>
+    @foreach (var doctor in Model.Doctors)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => doctor.DoctorsId)</td>
+            <td>@Html.DisplayFor(modelItem => doctor.Department.NameDepartments)</td>
+            <td>@Html.DisplayFor(modelItem => doctor.DoctorSurnames)</td>
+            <td>@Html.DisplayFor(modelItem => doctor.DoctorNames)</td>
+            <td>@Html.DisplayFor(modelItem => doctor.Specialties)</td>
+            <td>@Html.DisplayFor(modelItem => doctor.Categories)</td>
+                <td>
+                    @Html.ActionLink("Edit", "DoctorEdit", new { id = doctor.DoctorsId }, null) |
+                    @Html.ActionLink("Delete", "DoctorDelete", new { id = doctor.DoctorsId }, null)
+                </td>
+            
+        </tr>
+    }
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"
+           page-url-department="@(Model.FilterViewModel.SelectedDepartment)"
+           page-url-doctorSurname="@(Model.FilterViewModel.SelectDoctorSurname)"
+           page-url-doctorName="@(Model.FilterViewModel.SelectDoctorName)"
+           page-url-seconddate="@(Model.FilterViewModel.SelectSpecialties)"
+           page-url-specialties="@(Model.FilterViewModel.SelectCategories)"
+           page-url-categories="@(Model.SortViewModel.Current)"></page-link>

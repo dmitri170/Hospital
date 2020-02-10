@@ -1,0 +1,57 @@
+﻿@model Hospital.ViewModels.TreatmentsViewModels.TreatmentsViewModel
+
+@{
+    ViewData["Title"] = "DeleteTreatment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteTreatment</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Treatment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatments.First().TreatmentId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Treatments.First().Diagnosis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatments.First().ReceiptDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Treatments.First().ReceiptDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatments.First().DischargeDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Treatments.First().DischargeDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TreatmentViewModel.NameDepartment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TreatmentViewModel.NameDepartment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TreatmentViewModel.DoctorSurname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TreatmentViewModel.DoctorSurname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TreatmentViewModel.PacientSurname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TreatmentViewModel.PacientSurname)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteTreatment">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
